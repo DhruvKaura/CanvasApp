@@ -1,15 +1,10 @@
 const canvas = document.getElementById('signatureCanvas');
 const ctx = canvas.getContext('2d');
 let painting = false;
-let currentX = 0;
-let currentY = 0;
 
 function startPosition(e) {
     painting = true;
-    currentX = e.clientX || e.touches[0].clientX;
-    currentY = e.clientY || e.touches[0].clientY;
-    ctx.beginPath();
-    ctx.moveTo(currentX - canvas.offsetLeft, currentY - canvas.offsetTop);
+    draw(e);
 }
 
 function finishedPosition() {
@@ -23,10 +18,10 @@ function draw(e) {
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
     ctx.strokeStyle = getCurrentColor();
-    ctx.lineTo(e.clientX || e.touches[0].clientX - canvas.offsetLeft, e.clientY || e.touches[0].clientY - canvas.offsetTop);
+    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(e.clientX || e.touches[0].clientX - canvas.offsetLeft, e.clientY || e.touches[0].clientY - canvas.offsetTop);
+    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 }
 
 function saveCanvas() {
@@ -60,10 +55,6 @@ canvas.addEventListener('mouseup', finishedPosition);
 canvas.addEventListener('mouseout', finishedPosition);
 canvas.addEventListener('mousemove', draw);
 
-canvas.addEventListener('touchstart', startPosition);
-canvas.addEventListener('touchend', finishedPosition);
-canvas.addEventListener('touchmove', draw);
-
 const clearButton = document.getElementById('clear');
 clearButton.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -90,7 +81,6 @@ backgroundColors.forEach((color) => {
         backgroundColors.forEach((c) => c.classList.remove('active'));
         color.classList.add('active');
         canvas.style.backgroundColor = getCurrentBackgroundColor();
-        localStorage.setItem('backgroundColor', getCurrentBackgroundColor());
     });
 });
 
@@ -110,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`.background-color[style="background-color: ${savedBackgroundColor};"]`).click();
     }
 });
+
+localStorage.setItem('backgroundColor', getCurrentBackgroundColor());
 
 function downloadAsDataURL(canvas, format) {
     const tempCanvas = document.createElement('canvas');
