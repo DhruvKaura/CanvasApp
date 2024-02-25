@@ -108,8 +108,9 @@ function downloadAsDataURL(canvas, format) {
     tempCanvas.width = canvas.width;
     tempCanvas.height = canvas.height;
     const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(canvas, 0, 0);
+    tempCtx.globalCompositeOperation = 'destination-over';
     tempCtx.fillStyle = getCurrentBackgroundColor();
     tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-    tempCtx.drawImage(canvas, 0, 0);
     return tempCanvas.toDataURL(format);
 }
