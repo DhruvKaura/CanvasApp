@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Pad</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <div class="background-colors">
+                <button class="background-color active" style="background-color: #ffffff;"></button>
+                <button class="background-color" style="background-color: #ffcccc;"></button>
+                <button class="background-color" style="background-color: #ccccff;"></button>
+                <button class="background-color" style="background-color: #000000;"></button>
+            </div>
+            <div class="choose-background-color">
+                <p>Choose your canvas color:</p>
+            </div>
+        </div>
+        <div class="signature-pad">
+            <h1>Signature Pad</h1>
+            <canvas id="signatureCanvas" width="600" height="300"></canvas>
+            <div class="tools">
+                <div class="choose-color">
+                    <p>Choose your pen color:</p>
+                </div>
+                <div class="colors">
+                    <button class="color active" style="background-color: #000000;"></button>
+                    <button class="color" style="background-color: #ff0000;"></button>
+                    <button class="color" style="background-color: #00ff00;"></button>
+                    <button class="color" style="background-color: #0000ff;"></button>
+                </div>
+                <button id="clear">Clear</button>
+                <button id="download-button">Download</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
