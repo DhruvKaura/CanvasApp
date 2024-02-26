@@ -15,7 +15,7 @@ function finishedPosition() {
 
 function draw(e) {
     if (!painting) return;
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 3;
     ctx.lineCap = 'round';
     ctx.strokeStyle = getCurrentColor();
     ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
